@@ -8,15 +8,15 @@ function getInputWidth(input) {
 }
 
 let dropdownRotated = 0;
-$("#dropdown-bttn").on("click", function () {
+document.getElementById("dropdown-bttn").addEventListener("click", function () {
     dropdownRotated -= 180;
-    $(this).css("transform", `rotate(${dropdownRotated}deg)`);
+    this.style.transform = `rotate(${dropdownRotated}deg)`;
 
-    dropdownRotated % 360 === 0 ? $("#menu").css("display", "none") : $("#menu").css("display", "block")
+    document.getElementById("menu").style.display = dropdownRotated % 360 === 0 ? "none" : "block";
 })
 
 let settingsRotated = 0;
-$("#settings-bttn").on("click", function () {
+document.getElementById("settings-bttn").addEventListener("click", function () {
     settingsRotated -= 180;
-    $(this).css("transform", `rotate(${settingsRotated}deg)`);
-})
+    this.style.transform = `rotate(${settingsRotated}deg)`;
+});
