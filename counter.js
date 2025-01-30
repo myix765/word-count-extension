@@ -1,17 +1,22 @@
 chrome.action.onClicked.addListener((tab) => {
-    if (tab.url.startsWith("https://docs.google.com/document/")) {
-        chrome.scripting.executeScript({
-            target: { tabId: tab.id },
-            func: showWordCount
-        })
-    }
+    chrome.scripting.insertCSS({
+        target: { tabId: tab.id },
+        files: ["styles.css"]
+    });
+
+    // if (tab.url.startsWith("https://docs.google.com/document/")) {
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: showWordCount
+    })
+    // }
 })
 
 function showWordCount() {
     if (document.getElementById("counter-extension-popup")) return;
 
     const popup = document.createElement("div");
-    popup.id = "counter-extension-popup";
+    popup.id = "counter-extension-overlay";
     popup.innerHTML = `
         <div class="border" id="menu" style="display: none;">
             <button id="settings-bttn" class="transition">
@@ -24,7 +29,7 @@ function showWordCount() {
                 <p>Section sentences:</p>
                 <div style="display: flex; align-items: baseline; white-space: nowrap; overflow: hidden;">
                     <p>Words left until</p>
-                    <input type="number" inputmode="numeric" style="margin: 0 0.1rem 0 0.3rem;" min="0" pattern=" 0+\.[0-9]*[1-9][0-9]*$" oninput="getInputWidth(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                    <input type="number" class="words-left-input" inputmode="numeric" min="0" pattern=" 0+\.[0-9]*[1-9][0-9]*$" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                     <canvas id="canvas" style="display: none;"></canvas>
                     <p>: </p>
                 </div>
@@ -36,20 +41,12 @@ function showWordCount() {
         </div>
     `;
     document.body.appendChild(popup);
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = chrome.runtime.getURL("styles.css");
-    document.head.appendChild(link);
 
-    // have input element width grow with text
-    function getInputWidth(input) {
-        const canvas = document.getElementById('canvas');
-        const context = canvas.getContext('2d');
-        const font = window.getComputedStyle(input).font;
-        context.font = font;
-        const textWidth = context.measureText(" " + input.value).width;
-        input.style.width = `${textWidth + 8}px`;
-    }
+    // Add extension fonts
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap";
+    document.head.appendChild(link);
 
     // UI event listeners
     let dropdownRotated = 0;
@@ -64,5 +61,21 @@ function showWordCount() {
     document.getElementById("settings-bttn").addEventListener("click", function () {
         settingsRotated -= 180;
         this.style.transform = `rotate(${settingsRotated}deg)`;
+    });
+
+    // have input element width grow with text
+    function getInputWidth(input) {
+        console.log("getInputWidth")
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const font = window.getComputedStyle(input).font;
+        context.font = font;
+        const textWidth = context.measureText(" " + input.value).width;
+        input.style.width = `${textWidth + 8}px`;
+    }
+
+    const inputElement = document.querySelector('.words-left-input');
+    inputElement.addEventListener('input', function () {
+        getInputWidth(inputElement);
     });
 }

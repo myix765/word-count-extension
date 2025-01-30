@@ -6,11 +6,8 @@
     "action": {
       "default_title": "Section Word Count"
     },
-    "permissions": [
-        "activeTab",
-        "scripting"
-    ],
-    "host_permissions": ["https://docs.google.com/document/*"],
+    "permissions": ["activeTab", "scripting"],
+    "host_permissions": ["<all_urls>"],
     "background": {
         "service_worker": "counter.js"
     }

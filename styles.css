@@ -1,21 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap'); */
 
 :root {
     --highlight: 255, 212, 0;
 }
 
-body {
+#counter-extension-overlay {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Inter', sans-serif;
     font-size: 0.85rem;
+
+    min-width: 14rem;
+    width: fit-content;
+    position: fixed;
+    z-index: 99999999;
+    bottom: 6rem;
+    left: 2rem;
 }
 
-button, input[type="submit"], input[type="reset"] {
+#counter-extension-overlay button, input[type="submit"], input[type="reset"] {
 	background: none;
 	color: inherit;
 	border: none;
@@ -25,18 +29,21 @@ button, input[type="submit"], input[type="reset"] {
 	outline: inherit;
 }
 
-p {
+#counter-extension-overlay p {
     word-wrap: break-word;
+    margin: 0;
+    padding: 0;
 }
 
-input {
+#counter-extension-overlay .words-left-input {
     min-width: 2.65rem;
     width: 2.65rem;
-    max-width: 100%;
+    max-width: 4rem;
     outline: none;
     border: solid 0.12rem rgb(var(--highlight));
     border-radius: 3px;
     padding: 0.25rem 0 0.15rem 0.25rem;
+    margin: 0 0.1rem 0 0.3rem;
 }
 
 input::-webkit-outer-spin-button,
@@ -48,37 +55,28 @@ input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
 
-#counter-extension-popup {
-    min-width: 14rem;
-    width: fit-content;
-    position: fixed;
-    z-index: 99;
-    bottom: 6rem;
-    left: 2rem;
-    background-color: white;
-}
-
-.border {
+#counter-extension-overlay .border {
     border: solid 0.125rem rgb(var(--highlight));
     border-radius: 8px;
     padding: 1rem;
     box-shadow: -6px 6px 0px rgba(var(--highlight), 0.2);
+    background-color: white;
 }
 
-.menu-text {
+#counter-extension-overlay .menu-text {
     display: flex;
     flex-direction: column;
     row-gap: 0.5rem;
 }
 
-.minimized {
+#counter-extension-overlay .minimized {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 0.25rem;
 }
 
-.transition {
+#counter-extension-overlay .transition {
     transition-property: transform;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
