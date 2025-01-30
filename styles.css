@@ -51,10 +51,11 @@ input[type=number] {
 .counter {
     min-width: 14rem;
     width: fit-content;
-    position: absolute;
-    z-index: 99;
-    bottom: 6rem;
-    left: 2rem;
+    /* position: absolute; */
+    /* z-index: 99; */
+    /* bottom: 6rem;
+    left: 2rem; */
+    background-color: white;
 }
 
 .border {
@@ -74,7 +75,7 @@ input[type=number] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 .transition {

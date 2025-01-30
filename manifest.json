@@ -2,5 +2,9 @@
     "name": "Better Word Count",
     "description": "Google Docs Word Count Helper for Writing Essays",
     "version": "1.0",
-    "manifest_version": 3
+    "manifest_version": 3,
+    "action": {
+        "default_popup": "counter.html",
+        "default_title": "Section Word counter"
+    }
   }
