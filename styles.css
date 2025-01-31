@@ -11,7 +11,7 @@
     font-family: 'Inter', sans-serif;
     font-size: 0.85rem;
 
-    min-width: 14rem;
+    min-width: 16rem;
     width: fit-content;
     position: fixed;
     z-index: 99999999;
@@ -33,12 +33,21 @@
     word-wrap: break-word;
     margin: 0;
     padding: 0;
+    color: black;
+}
+
+#counter-extension-overlay .words-left-div {
+    display: flex;
+    align-items: baseline;
+    white-space: nowrap;
+    overflow: hidden;
+    /* margin-bottom: 0; */
 }
 
 #counter-extension-overlay .words-left-input {
     min-width: 2.65rem;
     width: 2.65rem;
-    max-width: 4rem;
+    max-width: 100%;
     outline: none;
     border: solid 0.12rem rgb(var(--highlight));
     border-radius: 3px;
@@ -46,16 +55,16 @@
     margin: 0 0.1rem 0 0.3rem;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+#counter-extension-overlay input::-webkit-outer-spin-button,
+#counter-extension-overlay input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-input[type=number] {
+#counter-extension-overlay input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
 
-#counter-extension-overlay .border {
+#counter-extension-overlay .counter-div-border {
     border: solid 0.125rem rgb(var(--highlight));
     border-radius: 8px;
     padding: 1rem;
@@ -63,17 +72,17 @@ input[type=number] {
     background-color: white;
 }
 
-#counter-extension-overlay .menu-text {
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.5rem;
+#counter-extension-overlay #menu > *:not(:last-child) {
+    margin-bottom: 0.5rem;
 }
 
-#counter-extension-overlay .minimized {
+#counter-extension-overlay #minimized {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 0.25rem;
+    min-width: 13.75rem;
+    width: fit-content;
 }
 
 #counter-extension-overlay .transition {
@@ -83,7 +92,7 @@ input[type=number] {
     transition-duration: 200ms;
 }
 
-#settings-bttn {
+#counter-extension-overlay #settings-bttn {
     width: 1.25rem;
     height: 1.25rem;
     float: inline-end;
@@ -91,7 +100,7 @@ input[type=number] {
 }
 
 
-#dropdown-bttn {
+#counter-extension-overlay #dropdown-bttn {
     width: 1.25rem;
     height: 1.25rem;
 }
